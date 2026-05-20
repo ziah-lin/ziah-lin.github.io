@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ziah Lin — Business Analytics & Strategy</title>
+  <meta name="description" content="Ziah Lin — Honors Mechanical Engineering at Ohio State with a Business Analytics minor. Pursuing business analytics and strategy consulting." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f3ede2;
+      --bg-alt: #e9e1d2;
+      --paper: #faf7f1;
+      --ink: #181715;
+      --ink-soft: #44413c;
+      --ink-muted: #837e72;
+      --accent: #b8451f;
+      --accent-deep: #8a3217;
+      --accent-soft: rgba(184, 69, 31, 0.08);
+      --line: #d4ccb9;
+      --line-soft: rgba(24, 23, 21, 0.08);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter Tight', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    .cursor {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s var(--ease), opacity 0.25s;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+    }
+    .cursor.grow {
+      width: 56px; height: 56px;
+      background: var(--accent);
+      mix-blend-mode: normal;
+      opacity: 0.85;
+    }
+    @media (max-width: 800px) {
+      body { cursor: auto; }
+      .cursor { display: none; }
+    }
+    a { color: inherit; text-decoration: none; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      position: relative;
+      z-index: 2;
+    }
+    nav {
+      padding: 28px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    nav .mark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav .mark::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    nav .mark em { font-style: italic; color: var(--accent); }
+    nav ul { display: flex; gap: 36px; list-style: none; align-items: center; }
+    nav a {
+      color: var(--ink-soft);
+      transition: color 0.2s;
+      position: relative;
+      padding: 4px 0;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease);
+    }
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
+    nav .time {
+      color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .hero .content { padding-top: 40px; }
+    .hero .meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero .meta::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--ink-muted);
+    }
+    .hero .meta .dot {
+      width: 6px; height: 6px;
+      background: #2a9d4a;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(42, 157, 74, 0.2);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(54px, 8vw, 108px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      margin-bottom: 32px;
+      font-variation-settings: 'opsz' 144;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+    }
+    .hero h1 .small {
+      font-size: 0.55em;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-muted);
+      display: block;
+      letter-spacing: -0.02em;
+      margin-top: 8px;
+    }
+    .hero .tag {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(19px, 1.7vw, 22px);
+      color: var(--ink-soft);
+      max-width: 560px;
+      line-height: 1.5;
+      margin-bottom: 44px;
+    }
+    .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border: 1px solid var(--ink);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.3s var(--ease);
+      background: transparent;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--ink);
+      transform: translateY(100%);
+      transition: transform 0.4s var(--ease);
+      z-index: -1;
+    }
+    .btn:hover { color: var(--bg); border-color: var(--ink); }
+    .btn:hover::before { transform: translateY(0); }
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--paper);
+    }
+    .btn.primary::before { background: var(--accent-deep); }
+    .btn.primary:hover { color: var(--paper); border-color: var(--accent-deep); }
+    .btn .arrow {
+      width: 14px; height: 14px;
+      transition: transform 0.3s var(--ease);
+    }
+    .btn:hover .arrow { transform: translate(3px, -3px); }
+    .portrait-wrap {
+      position: relative;
+      padding-top: 20px;
+    }
+    .portrait {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--bg-alt);
+      transform: rotate(-1.2deg);
+      box-shadow: 0 30px 60px -20px rgba(24, 23, 21, 0.25);
+      transition: transform 0.6s var(--ease);
+    }
+    .portrait:hover { transform: rotate(0deg) scale(1.02); }
+    .portrait img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      filter: sepia(0.35) contrast(1.05) saturate(0.85) hue-rotate(-8deg);
+      transition: filter 0.6s var(--ease);
+    }
+    .portrait:hover img {
+      filter: sepia(0) contrast(1) saturate(1) hue-rotate(0deg);
+    }
+    .portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(184, 69, 31, 0.15));
+      pointer-events: none;
+      transition: opacity 0.6s var(--ease);
+    }
+    .portrait:hover::after { opacity: 0; }
+    .portrait-tag {
+      position: absolute;
+      bottom: -14px; right: -14px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      transform: rotate(2deg);
+      z-index: 2;
+    }
+    .portrait-caption {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+    .scroll-ind {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: drift 2.4s ease-in-out infinite;
+    }
+    .scroll-ind .line {
+      width: 40px; height: 1px;
+      background: var(--ink-muted);
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); opacity: 0.7; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 40px 0 0;
+    }
+    .stats .stat {
+      padding: 0 24px;
+      border-right: 1px solid var(--line-soft);
+      transition: background 0.3s;
+    }
+    .stats .stat:first-child { padding-left: 0; }
+    .stats .stat:last-child { border-right: none; padding-right: 0; }
+    .stats .stat:hover { background: var(--accent-soft); }
+    .stats .num {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      font-variation-settings: 'opsz' 144;
+    }
+    .stats .num em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .stats .label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    .marquee-wrap {
+      margin: 80px -48px;
+      padding: 28px 0;
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee {
+      display: flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: scroll 50s linear infinite;
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .marquee span { display: inline-flex; align-items: center; gap: 60px; }
+    .marquee span::after {
+      content: '✦';
+      color: var(--accent);
+      font-size: 16px;
+    }
+    .marquee em { font-style: italic; color: var(--accent); font-weight: 300; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding: 100px 0 40px;
+      align-items: baseline;
+      border-top: 1px solid var(--line);
+    }
+    .section-head .num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+    }
+    .section-head .num small {
+      display: block;
+      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 8px;
+    }
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+    .section-head h2 em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .about {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .about .copy p {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 720px;
+    }
+    .about .copy p + p { margin-top: 22px; }
+    .about .copy strong { color: var(--ink); font-weight: 500; }
+    .status {
+      margin-top: 48px;
+      max-width: 720px;
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+    }
+    .status-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 24px;
+      padding: 14px 0;
+      border-bottom: 1px dotted var(--line);
+      align-items: baseline;
+    }
+    .status-row .key {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .status-row .val {
+      font-family: var(--font-display);
+      font-size: 18px;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    .status-row .val em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .project {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+      transition: background 0.4s;
+    }
+    .project:hover { background: linear-gradient(to right, var(--accent-soft), transparent); }
+    .project .side {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      position: sticky;
+      top: 40px;
+    }
+    .project .side .pnum {
+      display: block;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 56px;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      text-transform: none;
+      margin-bottom: 12px;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .project .side .pnum::first-letter { color: var(--accent); }
+    .project h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(28px, 3.4vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+    }
+    .project h3 em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .project .pitch {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+    .project .findings {
+      background: var(--paper);
+      border-left: 2px solid var(--accent);
+      padding: 22px 26px;
+      margin-bottom: 28px;
+      max-width: 680px;
+      position: relative;
+    }
+    .project .findings::before {
+      content: '"';
+      position: absolute;
+      top: -8px; left: 16px;
+      font-family: var(--font-display);
+      font-size: 64px;
+      color: var(--accent);
+      line-height: 1;
+      opacity: 0.3;
+    }
+    .project .findings .label-sm {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+    .project .findings p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .project .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .project .tags span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 5px 12px;
+      background: var(--bg-alt);
+      border-radius: 100px;
+      color: var(--ink-soft);
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .project:hover .tags span { background: var(--paper); }
+    .project .links {
+      display: flex;
+      gap: 28px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .project .links a {
+      color: var(--ink);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.2s;
+    }
+    .project .links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--ink);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease), background 0.2s;
+    }
+    .project .links a:hover { color: var(--accent); }
+    .project .links a:hover::after { background: var(--accent); transform: scaleX(0.5); }
+    .project .links a.muted {
+      color: var(--ink-muted);
+      cursor: not-allowed;
+    }
+    .project .links a.muted::after { background: var(--line); }
+    .exp {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .exp ul { list-style: none; }
+    .exp li {
+      padding: 26px 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+      transition: padding-left 0.4s var(--ease);
+      position: relative;
+    }
+    .exp li::before {
+      content: '→';
+      position: absolute;
+      left: -28px;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s var(--ease);
+      transform: translateX(-10px);
+    }
+    .exp li:hover { padding-left: 12px; }
+    .exp li:hover::before { opacity: 1; transform: translateX(0); }
+    .exp li:first-child { border-top: none; padding-top: 0; }
+    .exp .role {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      margin-bottom: 4px;
+    }
+    .exp .role em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .exp .org {
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+    .exp .when {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+    .skills {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .cluster {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .cat {
+      padding: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      transition: all 0.3s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .cat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease);
+    }
+    .cat:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .cat:hover::before { width: 100%; }
+    .cat h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+    .cat p {
+      font-family: var(--font-display);
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .awards {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+    .awards ul { list-style: none; }
+    .awards li {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 24px;
+      padding: 22px 0;
+      border-top: 1px dotted var(--line);
+      align-items: baseline;
+    }
+    .awards li:first-child { border-top: none; padding-top: 0; }
+    .awards .place {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 32px;
+      color: var(--accent);
+      font-weight: 300;
+      line-height: 1;
+    }
+    .awards .award-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .awards .award-sub {
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+    .awards .award-year {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+    }
+    footer {
+      padding: 120px 0 60px;
+      border-top: 1px solid var(--line);
+      margin-top: 40px;
+    }
+    footer .grid {
+      display: grid;
+      grid-template-columns: 240px 1fr auto;
+      gap: 48px;
+      align-items: end;
+      padding-bottom: 80px;
+    }
+    footer .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    footer h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(40px, 6vw, 76px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    footer h2 em { font-style: italic; color: var(--accent); font-weight: 300; }
+    footer .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      text-align: right;
+    }
+    footer .contact-links a {
+      color: var(--ink);
+      transition: color 0.2s, transform 0.3s var(--ease);
+      display: inline-block;
+    }
+    footer .contact-links a:hover { color: var(--accent); transform: translateX(-4px); }
+    .signature {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .signature .sig {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(80px, 18vw, 220px);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      font-variation-settings: 'opsz' 144;
+    }
+    .signature .sig em { color: var(--accent); }
+    .signature .thanks {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 24px;
+    }
+    .fine {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero .meta { animation: fadeUp 0.7s 0.1s both; }
+    .hero h1 { animation: fadeUp 0.9s 0.2s both; }
+    .hero .tag { animation: fadeUp 0.9s 0.35s both; }
+    .hero .actions { animation: fadeUp 0.9s 0.5s both; }
+    .portrait-wrap { animation: fadeIn 1.2s 0.4s both; }
+    @media (max-width: 900px) {
+      .wrap { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .hero .content { padding-top: 0; }
+      .portrait-wrap { max-width: 320px; }
+      nav ul { gap: 20px; font-size: 11px; }
+      nav .time { display: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 0 24px; }
+      .stats .stat { padding: 16px 0; border-right: none; border-bottom: 1px solid var(--line-soft); }
+      .stats .stat:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--line-soft); }
+      .stats .stat:nth-child(2n) { padding-left: 16px; }
+      .marquee-wrap { margin: 60px -24px; }
+      .marquee { font-size: 22px; gap: 40px; }
+      .section-head, .about, .project, .exp, .skills, .awards, footer .grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .section-head .num { font-size: 56px; }
+      .project .side { position: static; }
+      .project .side .pnum { font-size: 40px; }
+      .exp li { grid-template-columns: 1fr; gap: 4px; }
+      .awards li { grid-template-columns: 50px 1fr; }
+      .awards .award-year { grid-column: 2; }
+      footer .contact-links { text-align: left; }
+      .fine { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="wrap">
+
+    <nav>
+      <a href="#" class="mark">Ziah <em>Lin</em></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="time" id="clock">--:-- EST</li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="content">
+        <div class="meta">
+          <span class="dot"></span>
+          Cincinnati, OH · Available 2026
+        </div>
+        <h1>
+          Built from <em>engineering.</em><br>
+          Pointed at <em>strategy.</em>
+          <span class="small">— a portfolio</span>
+        </h1>
+        <p class="tag">
+          Honors Mechanical Engineering at Ohio State, Business Analytics minor — pursuing a career at the intersection of data, strategy, and operations.
+        </p>
+        <div class="actions">
+          <a href="#work" class="btn primary">
+            See selected work
+            <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/ziah-lin-541474206/" target="_blank" rel="noopener" class="btn">
+            LinkedIn
+            <svg class="arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="scroll-ind">
+          <span class="line"></span>
+          Scroll
+        </div>
+      </div>
+
+      <div class="portrait-wrap">
+        <div class="portrait">
+          <img src="ziah.jpg" alt="Ziah Lin" />
+        </div>
+        <div class="portrait-tag">Ziah Lin · '26</div>
+        <div class="portrait-caption">
+          <span>↳ The Analyst</span>
+          <span>Columbus, OH</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="stat">
+        <div class="num">5<em>+</em></div>
+        <div class="label">Industries<br>worked across</div>
+      </div>
+      <div class="stat">
+        <div class="num">800<em>+</em></div>
+        <div class="label">Data points<br>analyzed</div>
+      </div>
+      <div class="stat">
+        <div class="num">$500<em>k</em></div>
+        <div class="label">Pro-bono<br>grant pipeline built</div>
+      </div>
+      <div class="stat">
+        <div class="num">4<em>th</em></div>
+        <div class="label">Crowe National<br>Case Competition</div>
+      </div>
+    </section>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span>AMEND Consulting</span>
+        <span>GE Healthcare</span>
+        <span>Steiner <em>+</em> Associates</span>
+        <span>Arch City Studios</span>
+        <span>NSF HAMMER</span>
+        <span>Ohio State <em>Engineering</em></span>
+        <span>DECA International <em>Finalist</em></span>
+        <span>Eagle Scout</span>
+        <span>AMEND Consulting</span>
+        <span>GE Healthcare</span>
+        <span>Steiner <em>+</em> Associates</span>
+        <span>Arch City Studios</span>
+        <span>NSF HAMMER</span>
+        <span>Ohio State <em>Engineering</em></span>
+        <span>DECA International <em>Finalist</em></span>
+        <span>Eagle Scout</span>
+      </div>
+    </div>
+
+    <div class="section-head reveal" id="about">
+      <div class="num">i.<small>About</small></div>
+      <h2>Engineer by training, <em>analyst by instinct.</em></h2>
+    </div>
+
+    <section class="about reveal">
+      <div></div>
+      <div>
+        <div class="copy">
+          <p>
+            I'm an Honors Mechanical Engineering student at <strong>The Ohio State University</strong> with a Business Analytics minor — drawn to the kinds of problems where rigorous data work and business judgment meet. My background spans <strong>strategy consulting, market analysis, and engineering research</strong>, consistently asking me to translate complexity into decisions.
+          </p>
+          <p>
+            I'm pursuing a career in <strong>business analytics and strategy consulting</strong>, where the work centers on turning messy data into clear, defensible recommendations. Recent projects: a Bass Diffusion go-to-market model at GE Healthcare, a $500K grant pipeline strategy for a non-profit client, and an SQL analytics study of 100K+ e-commerce orders surfacing the structural patterns behind revenue growth.
+          </p>
+          <p>
+            Outside of work: an <strong>Eagle Scout</strong>, former <strong>DECA international finalist</strong>, and a stubbornly curious problem-solver.
+          </p>
+        </div>
+
+        <div class="status">
+          <div class="status-row">
+            <span class="key">Now</span>
+            <span class="val">Product &amp; Finance at <em>Arch City Studios</em></span>
+          </div>
+          <div class="status-row">
+            <span class="key">Next</span>
+            <span class="val">Business Analyst Co-Op at <em>AMEND Consulting</em></span>
+          </div>
+          <div class="status-row">
+            <span class="key">Studying</span>
+            <span class="val">Mech. Engineering <em>+</em> Business Analytics, OSU</span>
+          </div>
+          <div class="status-row">
+            <span class="key">Building</span>
+            <span class="val">SQL &amp; dashboarding fluency for analyst work</span>
+          </div>
+          <div class="status-row">
+            <span class="key">Reading</span>
+            <span class="val"><em>Good Strategy / Bad Strategy</em> — Rumelt</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-head reveal" id="work">
+      <div class="num">ii.<small>Selected Work</small></div>
+      <h2>Selected <em>projects.</em></h2>
+    </div>
+
+    <article class="project reveal">
+      <div class="side">
+        <span class="pnum">01</span>
+        SQL Analytics<br>2026
+      </div>
+      <div>
+        <h3>Olist E-commerce <em>SQL Analytics</em></h3>
+        <p class="pitch">
+          End-to-end SQL analysis of 100K+ Brazilian e-commerce orders across 9 relational tables — using CTEs, multi-table joins, and window functions to surface revenue trends, customer segmentation, and 90-day cohort retention.
+        </p>
+        <div class="findings">
+          <div class="label-sm">Headline finding</div>
+          <p>97% of customers were one-time buyers and 90-day retention averaged just 1.3% — revealing an acquisition-driven growth model rather than the typical retention-led e-commerce pattern.</p>
+        </div>
+        <div class="tags">
+          <span>SQL</span>
+          <span>SQLite</span>
+          <span>CTEs</span>
+          <span>Window Functions</span>
+          <span>Cohort Analysis</span>
+        </div>
+        <div class="links">
+          <a href="#" target="_blank" rel="noopener">View on GitHub →</a>
+          <a href="#" class="muted">Dashboard (soon)</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project reveal">
+      <div class="side">
+        <span class="pnum">02</span>
+        Strategy<br>2026
+      </div>
+      <div>
+        <h3>GE Healthcare — <em>AI Imaging GTM</em></h3>
+        <p class="pitch">
+          Built a 7-year go-to-market strategy for AI-enabled imaging using a Python-backed Bass Diffusion Model anchored on 9 analogous cases. Benchmarked 30 AI software and hardware competitors to inform partnership and displacement strategy.
+        </p>
+        <div class="findings">
+          <div class="label-sm">Delivered</div>
+          <p>Prioritized GTM recommendations to the Director of Strategy and C-suite, supported by quantitative diffusion modeling and competitive benchmarking.</p>
+        </div>
+        <div class="tags">
+          <span>Python</span>
+          <span>Market Sizing</span>
+          <span>Bass Diffusion</span>
+          <span>Competitive Analysis</span>
+        </div>
+        <div class="links">
+          <a href="#contact">Case details on request →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project reveal">
+      <div class="side">
+        <span class="pnum">03</span>
+        Consulting<br>2026
+      </div>
+      <div>
+        <h3>Steiner + Associates — <em>Real Estate Activation</em></h3>
+        <p class="pitch">
+          Led 30+ user interviews and applied agile sprint cycles to diagnose a student engagement gap in a $150M real estate asset. Iterated on 5 innovation concepts validated against 800+ data points, then developed a growth strategy and pilot plan.
+        </p>
+        <div class="findings">
+          <div class="label-sm">Impact</div>
+          <p>Pilot delivered a 19% increase in brand awareness and a 12% lift in foot traffic.</p>
+        </div>
+        <div class="tags">
+          <span>User Research</span>
+          <span>Agile</span>
+          <span>Strategy</span>
+          <span>Pilot Design</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="project reveal">
+      <div class="side">
+        <span class="pnum">04</span>
+        Pro Bono<br>2025–Now
+      </div>
+      <div>
+        <h3>Cincinnati Homeless Coalition — <em>Pro Bono Consulting</em></h3>
+        <p class="pitch">
+          Managed a 7-person consulting team using Kanban-style workflow tracking across 5 parallel workstreams. Balanced scope, bandwidth, and shifting needs across a semester-long engagement with a non-profit client.
+        </p>
+        <div class="findings">
+          <div class="label-sm">Delivered</div>
+          <p>6-month roadmap, marketing plan, standardized SOPs, and a $500K grant pipeline to non-profit leadership.</p>
+        </div>
+        <div class="tags">
+          <span>Project Management</span>
+          <span>Kanban</span>
+          <span>Stakeholder Mgmt</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="section-head reveal" id="experience">
+      <div class="num">iii.<small>Experience</small></div>
+      <h2>Where I've <em>worked.</em></h2>
+    </div>
+    <section class="exp reveal">
+      <div></div>
+      <ul>
+        <li>
+          <div>
+            <div class="role">Business Analyst <em>Co-Op</em></div>
+            <div class="org">AMEND Consulting · Cincinnati, OH</div>
+          </div>
+          <div class="when">Incoming · Aug 2026</div>
+        </li>
+        <li>
+          <div>
+            <div class="role">Product Development <em>+</em> Finance</div>
+            <div class="org">Arch City Studios (Forge Nest) · Columbus, OH</div>
+          </div>
+          <div class="when">Current</div>
+        </li>
+        <li>
+          <div>
+            <div class="role">Market Strategy <em>Analyst</em></div>
+            <div class="org">GE Healthcare · Columbus, OH</div>
+          </div>
+          <div class="when">2026</div>
+        </li>
+        <li>
+          <div>
+            <div class="role">Innovation <em>Analyst</em></div>
+            <div class="org">Steiner + Associates (via OnRamp) · Columbus, OH</div>
+          </div>
+          <div class="when">2026</div>
+        </li>
+        <li>
+          <div>
+            <div class="role">Project <em>Manager</em> — Pro Bono Consulting</div>
+            <div class="org">Student Consulting for Non-Profit Organizations</div>
+          </div>
+          <div class="when">Current</div>
+        </li>
+        <li>
+          <div>
+            <div class="role">Research <em>Assistant</em></div>
+            <div class="org">NSF HAMMER-ERC, Ohio State · Forging Technology</div>
+          </div>
+          <div class="when">2025</div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="section-head reveal">
+      <div class="num">iv.<small>Toolkit</small></div>
+      <h2>Tools &amp; <em>methods.</em></h2>
+    </div>
+    <section class="skills reveal">
+      <div></div>
+      <div class="cluster">
+        <div class="cat">
+          <h4>Data &amp; Analytics</h4>
+          <p>SQL · Python · R · Power BI · Tableau</p>
+        </div>
+        <div class="cat">
+          <h4>Modeling</h4>
+          <p>Bass Diffusion · Market Sizing · FEA</p>
+        </div>
+        <div class="cat">
+          <h4>Engineering</h4>
+          <p>MATLAB · C/C++ · OnShape · DEFORM</p>
+        </div>
+        <div class="cat">
+          <h4>Methods</h4>
+          <p>Agile (Kanban) · User Research · GTM Strategy</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-head reveal">
+      <div class="num">v.<small>Awards</small></div>
+      <h2>Recognition &amp; <em>distinctions.</em></h2>
+    </div>
+    <section class="awards reveal">
+      <div></div>
+      <ul>
+        <li>
+          <div class="place">4<sup>th</sup></div>
+          <div>
+            <div class="award-title">Crowe National Case Competition</div>
+            <div class="award-sub">4th of ~255 teams · 2-stage national case competition</div>
+          </div>
+          <div class="award-year">National</div>
+        </li>
+        <li>
+          <div class="place">2<sup>nd</sup></div>
+          <div>
+            <div class="award-title">DECA International — Business Services Marketing</div>
+            <div class="award-sub">Case competition · International finalist</div>
+          </div>
+          <div class="award-year">International</div>
+        </li>
+        <li>
+          <div class="place">★</div>
+          <div>
+            <div class="award-title">Eagle Scout</div>
+            <div class="award-sub">Highest rank · Scouting America</div>
+          </div>
+          <div class="award-year">2024</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer id="contact">
+      <div class="grid">
+        <span class="label">vi.<br>Contact</span>
+        <h2>Let's <em>talk.</em></h2>
+        <div class="contact-links">
+          <a href="mailto:Lin.5026@buckeyemail.osu.edu">Lin.5026@buckeyemail.osu.edu</a>
+          <a href="https://www.linkedin.com/in/ziah-lin-541474206/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="#" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="tel:5132502404">513.250.2404</a>
+        </div>
+      </div>
+
+      <div class="signature">
+        <div class="sig">Ziah <em>Lin</em></div>
+        <div class="thanks">— Thanks for scrolling —</div>
+      </div>
+
+      <div class="fine">
+        <span>© Ziah Lin · Cincinnati, OH</span>
+        <span>Built with care · 2026</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let cx = mx, cy = my;
+    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function tick() {
+      cx += (mx - cx) * 0.18;
+      cy += (my - cy) * 0.18;
+      cursor.style.left = cx + 'px';
+      cursor.style.top = cy + 'px';
+      requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, button, .portrait, .cat, .stat, .exp li').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+    });
+
+    function updateClock() {
+      const now = new Date();
+      const opts = { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: false };
+      const t = now.toLocaleTimeString('en-US', opts);
+      document.getElementById('clock').textContent = t + ' EST';
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
